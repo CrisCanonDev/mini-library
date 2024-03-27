@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface EditorialService {
     Editorial saveEditorial(Editorial editorial);
+    Optional<Editorial> findById(Integer id);
     Optional<Editorial> saveById(Integer id);
     Optional<Editorial> findByName(String name);
     List<Editorial> listAllEditorials();

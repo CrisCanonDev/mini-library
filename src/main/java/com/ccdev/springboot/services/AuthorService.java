@@ -14,5 +14,5 @@ public interface AuthorService {
     List<Author> listAllAuthors();
     Author updateAuthor(Author author);
     void deleteAuthor(Integer id) throws ClassNotFoundException;
-    List<Author> listByIds(List<Integer> ids);
+    List<Author> findByIds(List<Integer> ids);
 }
