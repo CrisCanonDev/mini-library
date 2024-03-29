@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping({"/authors"})
+@RequestMapping("/authors")
 public class AuthorController {
     @Autowired
     private AuthorService authorService;
@@ -21,7 +21,7 @@ public class AuthorController {
     public String listAuthors(Model model){
         List<Author> authors = authorService.listAllAuthors();
         model.addAttribute("authors", authors);
-        return "authors/list_authors";
+        return "author/list_authors";
     }
     @GetMapping("/new")
     public String showFormNewAuthor(Model model){
