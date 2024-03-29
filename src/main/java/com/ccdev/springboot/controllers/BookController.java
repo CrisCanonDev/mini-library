@@ -29,18 +29,18 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping({"","/list"})
+    @GetMapping({"/","/list"})
     public String ListBooks(Model model){
         List<Book> books = bookService.listAllBooks();
         model.addAttribute("books", books);
-        return "book/list";
+        return "book/list_books";
     }
     @GetMapping("/new")
     public String ShowFormNewBook(Model model){
         model.addAttribute("book", new Book());
         model.addAttribute("categories", categoryService.listAllCategories());
         model.addAttribute("editorials", editorialService.listAllEditorials());
-        model.addAttribute("editor", editorialService.listAllEditorials());
+        model.addAttribute("authors", authorService.listAllAuthors());
         return "book/form_book";
     }
     @PostMapping("/save")
@@ -58,24 +58,25 @@ public class BookController {
         List<Author> authors = authorService.findByIds(authorsId);
         book.setAuthors(authors);
 
+
         bookService.saveBook(book);
         return "redirect:/books/list";
     }
 
-    @GetMapping("{id}/edit")
+    @GetMapping("/{id}/edit")
     public String showFormEditBook(@PathVariable Integer id, Model model){
         Optional<Book> book = bookService.findById(id);
 
         if(book.isPresent()){
-            model.addAttribute("book", book);
+            model.addAttribute("book", book.get());
             model.addAttribute("categories", categoryService.listAllCategories());
             model.addAttribute("editorials", editorialService.listAllEditorials());
-            model.addAttribute("editor", editorialService.listAllEditorials());
+            model.addAttribute("authors", authorService.listAllAuthors());
         }
         return "book/form_book";
     }
 
-    @GetMapping("{id}/update")
+    @GetMapping("/{id}/update")
     public String updateBook(@PathVariable Integer id,
                              @ModelAttribute Book book,
                              @RequestParam("editorialId") Integer editorialId,
@@ -95,7 +96,7 @@ public class BookController {
         return "redirect:/books/list";
     }
 
-    @GetMapping("{id}/authors")
+    @GetMapping("/{id}/authors")
     public String showBookAuthors(@PathVariable Integer id, Model model){
         Optional<Book> optionalBook = bookService.findById(id);
         if(optionalBook.isPresent()){
@@ -106,7 +107,7 @@ public class BookController {
         return "book/show_book_authors";
     }
 
-    @GetMapping("{id}/delete")
+    @GetMapping("/{id}/delete")
     public String deleteBook(@PathVariable Integer id){
         bookService.deleteBook(id);
         return "redirect:/books/list";
