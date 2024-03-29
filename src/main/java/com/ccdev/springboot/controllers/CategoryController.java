@@ -24,7 +24,7 @@ public class    CategoryController {
     public String listCategories(Model model){
         List<Category> categories = categoryService.listAllCategories();
         model.addAttribute("categories", categories);
-        return "categories/list";
+        return "category/list_categories";
     }
     @GetMapping("/new")
     public String showFormNewCategory(Model model){
