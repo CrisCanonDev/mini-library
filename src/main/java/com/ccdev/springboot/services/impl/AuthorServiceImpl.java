@@ -53,7 +53,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<Author> listByIds(List<Integer> ids) {
+    public List<Author> findByIds(List<Integer> ids) {
         return authorRepository.findAllById(ids);
     }
 

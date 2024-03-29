@@ -20,6 +20,11 @@ public class EditorialServiceImpl implements EditorialService {
     }
 
     @Override
+    public Optional<Editorial> findById(Integer id) {
+        return editorialRepository.findById(id);
+    }
+
+    @Override
     public Optional<Editorial> saveById(Integer id) {
         return editorialRepository.findById(id);
     }
