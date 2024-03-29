@@ -39,10 +39,10 @@ public class    CategoryController {
         categorySaved.setBooks(books);
         return "redirect:/categories/list";
     }
-    @GetMapping("/edit/{id}")
+    @GetMapping("/{id}/edit")
     public String showFormEditCategory(@PathVariable Integer id, Model model){
         Optional<Category> category = categoryService.findById(id);
-        category.ifPresent(value -> model.addAttribute("category", category));
+        category.ifPresent(value -> model.addAttribute("category", value));
         return "category/form_category";
     }
     @PostMapping("/{id}/update")
