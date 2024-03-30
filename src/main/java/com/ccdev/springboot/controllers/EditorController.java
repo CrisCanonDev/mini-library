@@ -19,14 +19,14 @@ public class EditorController {
 
     @GetMapping("/new")
     public String showFormNewEditorial(Model model){
-        model.addAttribute("model", new Editorial());
+        model.addAttribute("editorial", new Editorial());
         return "editorial/form_editorial";
     }
 
     @PostMapping("/save")
     public String saveEditorial(@ModelAttribute Editorial editorial){
-        Editorial editorialSaved = editorialService.saveEditorial(editorial);
-        return "redirect:/editorials/list";
+        editorialService.saveEditorial(editorial);
+        return "redirect:/editors/list";
     }
     @GetMapping({"list","/"})
     public String listEditorial(Model model){
@@ -60,16 +60,17 @@ public class EditorController {
             currentEditorial.setName(editorial.getName());
             editorialService.updateEditorial(currentEditorial);
         }
-        return "redirect:/editorials/list";
+        return "redirect:/editors/list";
     }
 
     @GetMapping("{id}/delete")
     public String deleteEditorial(@PathVariable Integer id){
         editorialService.deleteEditorial(id);
-        return "redirect:/editorials/list";
+        return "redirect:/editors/list";
     }
 
 
+    @GetMapping("{id}/books")
     public String showBooksOfEditorial(@PathVariable Integer id, Model model){
         Optional<Editorial> optionalEditorial = editorialService.findById(id);
         if(optionalEditorial.isPresent()){
