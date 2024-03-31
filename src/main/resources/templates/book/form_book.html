@@ -54,7 +54,7 @@
                 <option th:each="author: ${authors}" th:value="${author.id}" th:text="${author.name}"></option>
             </select>
         </div>
-
+        <a href="/books/" class="btn btn-secondary mt-2">Return</a>
         <button type="submit" class="btn btn-primary mt-2">Save</button>
     </form>
 </div>
