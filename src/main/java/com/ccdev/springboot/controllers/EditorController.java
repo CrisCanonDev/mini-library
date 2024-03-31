@@ -35,7 +35,7 @@ public class EditorController {
         return "editorial/list_editorials";
     }
 
-    @PostMapping("{id}")
+    @GetMapping("{id}")
     public String showEditorial(@PathVariable Integer id, Model model){
         Optional<Editorial> editorialOptional = editorialService.findById(id);
         if(editorialOptional.isPresent()){
